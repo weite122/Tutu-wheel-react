@@ -1,5 +1,5 @@
-/dist
-.idea
+/dist/*
+/.idea
 # Logs
 logs
 *.log
