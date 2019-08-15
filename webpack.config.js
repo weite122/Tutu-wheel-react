@@ -1,5 +1,4 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     index: './lib/index.tsx'
@@ -17,13 +16,12 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader'
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader'
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Tutu-wheel-react",
-      template: 'index.html'
-    })
-  ]
+  }
+
 }
