@@ -2,8 +2,10 @@ import Icon from './icon';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+const fn = () => {
+  console.log(fn);
+};
+
 ReactDOM.render(<div>
-  <Icon name="wechat"/>
-  <Icon name="alipay"/>
-  <Icon name="qq"/>
-</div>, document.querySelector("#root"));
+  <Icon onClick={fn} name="wechat"/>
+</div>, document.querySelector('#root'));
