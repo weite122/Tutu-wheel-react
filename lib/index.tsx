@@ -1,4 +1,4 @@
-import Icon from './icon';
+import Icon from './icon/icon';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
