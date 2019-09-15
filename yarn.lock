@@ -3943,10 +3943,10 @@ jest-jasmine2@^24.8.0:
     pretty-format "^24.8.0"
     throat "^4.0.0"
 
-jest-junit@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.npm.taobao.org/jest-junit/download/jest-junit-8.0.0.tgz#d4f7ff67e292a5426dc60bc38694c9f77cb94178"
-  integrity sha1-1Pf/Z+KSpUJtxgvDhpTJ93y5QXg=
+jest-junit@^6.3.0:
+  version "6.4.0"
+  resolved "https://registry.npm.taobao.org/jest-junit/download/jest-junit-6.4.0.tgz#23e15c979fa6338afde46f2d2ac2a6b7e8cf0d9e"
+  integrity sha1-I+Fcl5+mM4r95G8tKsKmt+jPDZ4=
   dependencies:
     jest-validate "^24.0.0"
     mkdirp "^0.5.1"
