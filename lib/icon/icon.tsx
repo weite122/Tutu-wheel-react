@@ -5,7 +5,6 @@ import classes from '../helpers/classes';
 
 interface IconProps extends React.SVGAttributes<SVGElement> {
   name: string;
-  onClick: React.MouseEventHandler<SVGElement>
 }
 
 const Icon: React.FunctionComponent<IconProps> =
@@ -20,3 +19,4 @@ const Icon: React.FunctionComponent<IconProps> =
   };
 
 export default Icon;
+
