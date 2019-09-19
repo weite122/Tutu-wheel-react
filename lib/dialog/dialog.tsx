@@ -1,25 +1,37 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, ReactElement} from 'react';
 import './dialog.scss';
 import {Icon} from '../index';
 import {scopedClassMaker} from '../classes';
 
 interface Props {
-  visible: boolean
+  visible: boolean,
+  buttons: Array<ReactElement>,
+  onClose: React.MouseEventHandler,
+  closeOnClickMask?: boolean
 }
 
 
-const scopedClass = scopedClassMaker('tutu-dialog')
-const sc = scopedClass
+const scopedClass = scopedClassMaker('tutu-dialog');
+const sc = scopedClass;
 
 
 const Dialog: React.FunctionComponent<Props> = (props) => {
+  const onClickClose: React.MouseEventHandler = (e) => {
+    props.onClose(e);
+  };
+  const onClickMask: React.MouseEventHandler = (e) => {
+    if(props.closeOnClickMask) {
+      props.onClose(e)
+    }
+  }
+
   return (
     props.visible ?
       <Fragment>
-        <div className={sc('mask')}>
+        <div className={sc('mask')} onClick={onClickMask}>
         </div>
         <div className={sc()}>
-          <div className={sc('close')}>
+          <div className={sc('close')} onClick={onClickClose}>
             <Icon name="close"/>
           </div>
           <header className={sc('header')}>
@@ -29,8 +41,9 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
             {props.children}
           </main>
           <footer className={sc('footer')}>
-            <button>ok</button>
-            <button>cancel</button>
+            {props.buttons.map((button, index) =>
+              React.cloneElement(button, {key: index})
+            )}
           </footer>
         </div>
       </Fragment> :
@@ -38,5 +51,8 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
   );
 };
 
+Dialog.defaultProps = {
+  closeOnClickMask: false
+}
 
 export default Dialog;
