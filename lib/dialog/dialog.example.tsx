@@ -7,7 +7,7 @@ export default function () {
 
   return (
     <div>
-      <div>
+      <div style={{position: 'relative', zIndex: 10, border: '1px solid red', color: 'red'}}>
         <h1>example 1</h1>
         <button onClick={() => setX(!x)}>click</button>
         <Dialog visible={x} buttons={
@@ -19,7 +19,7 @@ export default function () {
           <strong>hi</strong>
         </Dialog>
       </div>
-      <div>
+      <div style={{position: 'relative', zIndex: 9}}>
         <h1>example 2</h1>
         <button onClick={() => setY(!y)}>click</button>
         <Dialog closeOnClickMask={true} visible={y} buttons={

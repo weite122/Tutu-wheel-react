@@ -2,6 +2,7 @@ import React, {Fragment, ReactElement} from 'react';
 import './dialog.scss';
 import {Icon} from '../index';
 import {scopedClassMaker} from '../classes';
+import ReactDOM from 'react-dom';
 
 interface Props {
   visible: boolean,
@@ -20,13 +21,11 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
     props.onClose(e);
   };
   const onClickMask: React.MouseEventHandler = (e) => {
-    if(props.closeOnClickMask) {
-      props.onClose(e)
+    if (props.closeOnClickMask) {
+      props.onClose(e);
     }
-  }
-
-  return (
-    props.visible ?
+  };
+  const x = props.visible ?
       <Fragment>
         <div className={sc('mask')} onClick={onClickMask}>
         </div>
@@ -47,12 +46,14 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
           </footer>
         </div>
       </Fragment> :
-      null
+      null;
+  return (
+   ReactDOM.createPortal(x, document.body)
   );
 };
 
 Dialog.defaultProps = {
   closeOnClickMask: false
-}
+};
 
 export default Dialog;
