@@ -8,7 +8,7 @@ interface Props {
   visible: boolean,
   buttons?: Array<ReactElement>,
   onClose: React.MouseEventHandler,
-  closeOnClickMask?: boolean
+  closeOnClickMask?: boolean,
 }
 
 
@@ -25,7 +25,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
       props.onClose(e);
     }
   };
-  const x = props.visible ?
+  const result = props.visible &&
     <Fragment>
       <div className={sc('mask')} onClick={onClickMask}>
       </div>
@@ -46,10 +46,9 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
           )}
         </footer>}
       </div>
-    </Fragment> :
-    null;
+    </Fragment>
   return (
-    ReactDOM.createPortal(x, document.body)
+    ReactDOM.createPortal(result, document.body)
   );
 };
 
