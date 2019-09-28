@@ -4,12 +4,19 @@
 ul, ol {list-style: none;}
 h1, h2, h3, h4, h5, h6 {font-weight: normal;}
 a { text-decoration: none; color: inherit; }
+pre {
+  font-family: "Fira Code Medium", Consolas, monospace;
+}
 body{
   font-size: 16px;
 }
 $padding: 16px;
 $main-color: #4d4d4d;
 $border-color: #eee;
+.example {
+  padding: 16px 0;
+}
+
 .site-page {
   background: #ffffff;
 }
