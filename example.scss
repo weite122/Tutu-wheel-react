@@ -4,6 +4,9 @@
 ul, ol {list-style: none;}
 h1, h2, h3, h4, h5, h6 {font-weight: normal;}
 a { text-decoration: none; color: inherit; }
+body{
+  font-size: 16px;
+}
 $padding: 16px;
 $main-color: #4d4d4d;
 $border-color: #eee;
@@ -35,12 +38,19 @@ $border-color: #eee;
     font-size: 18px;
   }
   ul {
-    padding: 0 $padding;
     min-width: 12em;
     > li {
-      padding: 8px 0;
       a {
-        color: $main-color;
+        color: #333;
+        display: block;
+        padding: 8px $padding;
+        &:hover {
+          color: $main-color;
+        }
+        &.active {
+          color: white;
+          background: $main-color;
+        }
       }
     }
   }
