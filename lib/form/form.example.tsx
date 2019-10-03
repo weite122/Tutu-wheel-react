@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Form, {FormValue} from './form';
 import {Fragment, useState} from 'react';
-import Validator from './validator';
+import Validator, {noError} from './validator';
 
 const FormExample: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<FormValue>({
@@ -12,6 +12,8 @@ const FormExample: React.FunctionComponent = () => {
     {name: 'username', label: '用户名', input: {type: 'text'}},
     {name: 'password', label: '密码', input: {type: 'password'}}
   ]);
+
+  const [errors, setErrors] = useState({});
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const rules = [
       {key: 'username', required: true},
@@ -20,7 +22,10 @@ const FormExample: React.FunctionComponent = () => {
       {key: 'password', required: true}
     ];
     const errors = Validator(formData, rules);
-    console.log(errors);
+    setErrors(errors);
+    if(noError(errors)) {
+
+    }
   };
 
   return (
@@ -32,6 +37,7 @@ const FormExample: React.FunctionComponent = () => {
                 <button>返回</button>
               </Fragment>
             }
+            errors={errors}
             onChange={(newValue) => setFormData(newValue)}
             onSubmit={onSubmit}
       />

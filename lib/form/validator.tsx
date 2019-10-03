@@ -25,7 +25,6 @@ export function noError(errors: any) {
 const Validator = ((formValue: FormValue, rules: FormRules): FormErrors => {
   let errors: any = {};
   const addError = (key: string, message: string) => {
-    console.log(errors[key]);
     if (errors[key] === undefined) {
       errors[key] = [];
     }
