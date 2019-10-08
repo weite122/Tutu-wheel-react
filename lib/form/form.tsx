@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {ReactFragment} from 'react';
 import Input from '../input/input';
+import classes from '../helpers/classes';
+import './form.scss';
 
 export interface FormValue {
   [K: string]: any
@@ -12,7 +14,7 @@ interface Props {
   buttons: ReactFragment;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   onChange: (value: FormValue) => void;
-  errors: {[K:string]: string[]}
+  errors: { [K: string]: string[] }
 }
 
 const Form: React.FunctionComponent<Props> = (props) => {
@@ -22,23 +24,33 @@ const Form: React.FunctionComponent<Props> = (props) => {
     props.onSubmit(e);
   };
   const onInputChange = (name: string, value: string) => {
-    const newFormValue = {...formData, [name]: value}
-    props.onChange(newFormValue)
+    const newFormValue = {...formData, [name]: value};
+    props.onChange(newFormValue);
   };
   return (
     <form onSubmit={onSubmit}>
-      {props.fields.map(f =>
-        <div key={f.name}>
-          {f.label}
-          <Input type={f.input.type} value={formData[f.name]}
-                 onChange={(e) => onInputChange(f.name, e.target.value)}
-          />
-          <div>{props.errors[f.name]}</div>
+      <table>
+        {props.fields.map(f =>
+          <tr key={f.name} className={classes('tutu-form-tr')}>
+            <td className="tutu-form-td">
+              <span className="tutu-form-label">
+                {f.label}
+              </span>
+            </td>
+            <td className="tutu-form-td">
+              <Input className={classes('tutu-form-input')}
+                     type={f.input.type}
+                     value={formData[f.name]}
+                     onChange={(e) => onInputChange(f.name, e.target.value)}
+              />
+            </td>
+            <div>{props.errors[f.name]}</div>
+          </tr>
+        )}
+        <div>
+          {props.buttons}
         </div>
-      )}
-      <div>
-        {props.buttons}
-      </div>
+      </table>
     </form>
   );
 };

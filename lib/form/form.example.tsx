@@ -2,6 +2,7 @@ import * as React from 'react';
 import Form, {FormValue} from './form';
 import {Fragment, useState} from 'react';
 import Validator, {noError} from './validator';
+import Button from '../button/button';
 
 const FormExample: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<FormValue>({
@@ -9,7 +10,7 @@ const FormExample: React.FunctionComponent = () => {
     password: ''
   });
   const [fields] = useState([
-    {name: 'username', label: '用户名', input: {type: 'text'}},
+    {name: 'username', label: '营业执照号码', input: {type: 'text'}},
     {name: 'password', label: '密码', input: {type: 'password'}}
   ]);
 
@@ -33,8 +34,8 @@ const FormExample: React.FunctionComponent = () => {
       <Form value={formData} fields={fields}
             buttons={
               <Fragment>
-                <button type="submit">提交</button>
-                <button>返回</button>
+                <Button type="submit">提交</Button>
+                <Button>返回</Button>
               </Fragment>
             }
             errors={errors}
