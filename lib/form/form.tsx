@@ -47,9 +47,12 @@ const Form: React.FunctionComponent<Props> = (props) => {
             <div>{props.errors[f.name]}</div>
           </tr>
         )}
-        <div>
-          {props.buttons}
-        </div>
+        <tr className="tutu-form-tr">
+          <td className="tutu-form-td"/>
+          <td className="tutu-form-td">
+            {props.buttons}
+          </td>
+        </tr>
       </table>
     </form>
   );

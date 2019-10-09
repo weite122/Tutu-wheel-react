@@ -34,7 +34,7 @@ const FormExample: React.FunctionComponent = () => {
       <Form value={formData} fields={fields}
             buttons={
               <Fragment>
-                <Button type="submit">提交</Button>
+                <Button type="submit" level="important">提交</Button>
                 <Button>返回</Button>
               </Fragment>
             }

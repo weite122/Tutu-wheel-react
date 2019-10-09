@@ -9,7 +9,7 @@
   }
   &-normal {
     color: #333;
-    border: 1px solid lighten(#333, 50%);
+    border: 1px solid lighten(#34a853, 50%);
     background: white;
     &:hover, &:focus {
       border-color: $main-color;
@@ -18,8 +18,8 @@
   }
   &-important {
     color: white;
-    border: 1px solid $main-color;
     background: $main-color;
+    border: 1px solid lighten(#34a853, 50%);
     &:hover, &:focus {
       background: lighten($main-color, 10%);
       border-color: lighten($main-color, 10%);
