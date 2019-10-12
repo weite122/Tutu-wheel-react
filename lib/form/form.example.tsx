@@ -6,7 +6,7 @@ import Button from '../button/button';
 
 const FormExample: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<FormValue>({
-    username: 'xxx',
+    username: '',
     password: ''
   });
   const [fields] = useState([
@@ -31,7 +31,8 @@ const FormExample: React.FunctionComponent = () => {
 
   return (
     <div>
-      <Form value={formData} fields={fields}
+      <Form value={formData}
+            fields={fields}
             buttons={
               <Fragment>
                 <Button type="submit" level="important">提交</Button>
