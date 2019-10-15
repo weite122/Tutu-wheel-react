@@ -4,13 +4,26 @@ import {Fragment, useState} from 'react';
 import Validator, {noError} from './validator';
 import Button from '../button/button';
 
+
+const usernames = ['frank', 'jack', 'frankfrank', 'alice', 'bob'];
+const checkUserName = (username: string, succeed: () => void, fail: () => void) => {
+  setTimeout(() => {
+    if (usernames.indexOf(username) >= 0) {
+      fail();
+    } else {
+      succeed();
+    }
+  }, 2000);
+};
+
 const FormExample: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<FormValue>({
-    username: '',
+    username: 'frank',
     password: ''
   });
   const [fields] = useState([
-    {name: 'username', label: '营业执照号码', input: {type: 'text'}},
+    {name: 'username', label: '用户名', input: {type: 'text'}},
+    {name: 'image', label: '头像', input: {type: 'text'}},
     {name: 'password', label: '密码', input: {type: 'password'}}
   ]);
 
@@ -19,14 +32,36 @@ const FormExample: React.FunctionComponent = () => {
     const rules = [
       {key: 'username', required: true},
       {key: 'username', minLength: 8, maxLength: 16},
+      {
+        key: 'username', validator: {
+          name: 'unique',
+          validate(username: string) {
+            return new Promise<void>((resolve, reject) => {
+              checkUserName(username, resolve, reject);
+            });
+          }
+        }
+      },
       {key: 'username', pattern: /^[A-Za-z0-9]+$/},
       {key: 'password', required: true}
     ];
-    const errors = Validator(formData, rules);
-    setErrors(errors);
-    if(noError(errors)) {
+    Validator(formData, rules, (errors) => {
+      setErrors(errors);
+      if (noError(errors)) {
 
-    }
+      }
+    });
+  };
+
+  const transformError = (message: string) => {
+    const map: any = {
+      // * 用户可以自定义
+      // unique: 'username is taken',
+      // required: 'required',
+      // minLength: 'too short',
+      // maxLength: 'too long'
+    };
+    return map[message];
   };
 
   return (
@@ -40,6 +75,7 @@ const FormExample: React.FunctionComponent = () => {
               </Fragment>
             }
             errors={errors}
+            transformError={transformError}
             onChange={(newValue) => setFormData(newValue)}
             onSubmit={onSubmit}
       />

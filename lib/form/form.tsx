@@ -16,6 +16,7 @@ interface Props {
   onChange: (value: FormValue) => void;
   errors: { [K: string]: string[] };
   errorsDisplayMode?: 'first' | 'all';
+  transformError?: (message: string) => string;
 }
 
 const Form: React.FunctionComponent<Props> = (props) => {
@@ -28,9 +29,19 @@ const Form: React.FunctionComponent<Props> = (props) => {
     const newFormValue = {...formData, [name]: value};
     props.onChange(newFormValue);
   };
+  const transformError = (message: string) => {
+    const map: any ={
+      required: '必填',
+      minLength: '太短',
+      maxLength: '太长',
+      pattern: '格式不正确'
+    }
+    return props.transformError && props.transformError(message) || map[message] || '未知错误'
+  }
   return (
     <form onSubmit={onSubmit}>
       <table className="tutu-form-table">
+        <tbody>
         {props.fields.map(f =>
           <tr key={f.name} className={classes('tutu-form-tr')}>
             <td className="tutu-form-td">
@@ -47,8 +58,8 @@ const Form: React.FunctionComponent<Props> = (props) => {
               <div className="tutu-form-error">{
                 props.errors[f.name] ?
                   (props.errorsDisplayMode === 'first' ?
-                    props.errors[f.name][0] :
-                    props.errors[f.name].join('，')) :
+                    transformError!(props.errors[f.name][0]) :
+                    props.errors[f.name].map(transformError!).join('，')) :
                   <span>&nbsp;</span>
               }</div>
             </td>
@@ -60,6 +71,7 @@ const Form: React.FunctionComponent<Props> = (props) => {
             {props.buttons}
           </td>
         </tr>
+        </tbody>
       </table>
     </form>
   );
