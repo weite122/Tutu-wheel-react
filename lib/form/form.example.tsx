@@ -41,8 +41,7 @@ const FormExample: React.FunctionComponent = () => {
       {key: 'username', validator},
       {key: 'username', pattern: /^[A-Za-z0-9]+$/},
       {key: 'password', required: true},
-      {key: 'password', validator},
-      {key: 'password', validator},
+      {key: 'password', pattern: /^[A-Za-z0-9]+$/}
     ];
     Validator(formData, rules, (errors) => {
       setErrors(errors);
@@ -55,10 +54,11 @@ const FormExample: React.FunctionComponent = () => {
   const transformError = (message: string) => {
     const map: any = {
       // * 用户可以自定义
-      // unique: 'username is taken',
-      // required: 'required',
-      // minLength: 'too short',
-      // maxLength: 'too long'
+      unique: '用户名已存在',
+      required: '必填',
+      minLength: '太短',
+      maxLength: '太长',
+      pattern:'格式不正确'
     };
     return map[message];
   };
