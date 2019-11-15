@@ -31,7 +31,6 @@ const Form: React.FunctionComponent<Props> = (props) => {
   };
   const transformError = (message: string) => {
     const map: any ={
-      unique: '用户名已被占用',
       required: '必填',
       minLength: '太短',
       maxLength: '太长',
