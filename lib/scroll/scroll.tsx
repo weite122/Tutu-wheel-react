@@ -1,20 +1,19 @@
-import * as React from 'react';
-import {HTMLAttributes} from 'react';
-import './scroll.scss';
-import scrollbarWidth from './scrollbar-width';
+import React, {HTMLAttributes} from 'react';
+import "./scroll.scss"
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface Props extends HTMLAttributes<HTMLElement> {
 
 }
 
 const Scroll: React.FunctionComponent<Props> = (props) => {
-  const {children, ...rest} = props;
+  const {children, ...rest} = props
   return (
-    <div className="fui-scroll" {...rest}>
-      <div className="fui-scroll-inner" style={{right: -scrollbarWidth()}}>
+    <div  className="tutu-scroll" {...rest}>
+      <div className="tutu-scroll-inner">
         {children}
       </div>
     </div>
   );
 };
+
 export default Scroll;
