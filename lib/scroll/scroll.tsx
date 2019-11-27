@@ -1,4 +1,12 @@
-import React, {HTMLAttributes, MouseEventHandler, UIEventHandler, useEffect, useRef, useState} from 'react';
+import React, {
+  HTMLAttributes,
+  MouseEventHandler,
+  TouchEventHandler,
+  UIEventHandler,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import './scroll.scss';
 import scrollbarWidth from './scrollbar-width';
 
@@ -80,11 +88,47 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
       document.removeEventListener('selectstart', onSelect);
     };
   }, []);
+
+  const [translateY, _setTranslateY] = useState(0);
+  const setTranslateY = (y: number) => {
+    if (y < 0) {y = 0;} else if (y > 150) {y = 150;}
+    _setTranslateY(y);
+  };
+  const lastYRef = useRef(0);
+  const moveCount = useRef(0);
+  const pulling = useRef(false);
+  const onTouchStart: TouchEventHandler = (e) => {
+    const scrollTop = containerRef.current!.scrollTop;
+    if (scrollTop !== 0) {return;}
+    pulling.current = true;
+    lastYRef.current = e.touches[0].clientY;
+    moveCount.current = 0;
+  };
+  const onTouchMove: TouchEventHandler = (e) => {
+    const deltaY = e.touches[0].clientY - lastYRef.current;
+    moveCount.current += 1;
+    if (moveCount.current === 1 && deltaY < 0) {
+      pulling.current = false;
+      return;
+    }
+    if (!pulling.current) {return;}
+    setTranslateY(translateY + deltaY);
+    console.log(translateY + deltaY);
+    lastYRef.current = e.touches[0].clientY;
+  };
+  const onTouchEnd: TouchEventHandler = () => {
+    setTranslateY(0);
+  };
+
   return (
     <div className="tutu-scroll" {...rest}>
-      <div className="tutu-scroll-inner" style={{right: -scrollbarWidth()}}
+      <div className="tutu-scroll-inner" style={{right: -scrollbarWidth(), transform: `translateY(${translateY}px)`}}
            ref={containerRef}
-           onScroll={onScroll}>
+           onScroll={onScroll}
+           onTouchMove={onTouchMove}
+           onTouchStart={onTouchStart}
+           onTouchEnd={onTouchEnd}
+      >
         {children}
       </div>
       {barVisible &&
