@@ -113,7 +113,6 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
     }
     if (!pulling.current) {return;}
     setTranslateY(translateY + deltaY);
-    console.log(translateY + deltaY);
     lastYRef.current = e.touches[0].clientY;
   };
   const onTouchEnd: TouchEventHandler = () => {
@@ -138,7 +137,11 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
         />
       </div>
       }
-
+      <div className="tutu-scroll-pulling" style={{height: translateY}}>
+        {translateY === 150 ?
+          <span className="tutu-scroll-pulling-text">释放手指即可更新</span> :
+          <span className="tutu-scroll-pulling-icon">↓</span>}
+      </div>
     </div>
   );
 };
