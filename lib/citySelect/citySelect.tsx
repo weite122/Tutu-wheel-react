@@ -1,13 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import './citySelect.scss';
 import ReactDOM from 'react-dom';
+import pinyin from 'tiny-pinyin';
 
 interface Props {
-
+  dataSource: string[]
 }
 
 const CitySelect: React.FC<Props> = (props) => {
   const [dialogVisible, setDialogVisible] = useState(false)
+  const map: { [key: string]: string[] } = {}
+
+  props.dataSource.map((city) => {
+    const py = pinyin.convertToPinyin(city)
+    const index = py[0]
+    map[index] = map[index] || []
+    map[index].push(city)
+  })
+
+  console.log(map);
+  console.log(Object.keys(map));
   const onClick = () => {
     setDialogVisible(true)
   }
@@ -41,9 +53,9 @@ const CurrentLocation: React.FC = () => {
   useEffect(() => {
     const xhr = new XMLHttpRequest()
     xhr.open('get', 'http://ip-api.com/json/?lang=zh-CN')
-    xhr.onload =() => {
+    xhr.onload = () => {
       const string = xhr.responseText
-      const obj =JSON.parse(string)
+      const obj = JSON.parse(string)
       const c = obj.city
       setCity(c)
     }
