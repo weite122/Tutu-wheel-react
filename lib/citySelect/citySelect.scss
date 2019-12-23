@@ -34,4 +34,31 @@
       padding: 4px 0;
     }
   }
+    &-citySection {
+    border-left: 1px solid rgb(237, 235, 229);
+    overflow: hidden;
+    > h4 {
+      border: 1px solid rgb(237, 235, 229);
+      border-left: none;
+      border-bottom: none;
+      float: left;
+      width: 25%;
+      line-height: 80px;
+      text-align: center;
+      font-size: 40px;
+    }
+    > .tutu-citySelect-cityName {
+      float: left;
+      width: 25%;
+      font-size: 14px;
+      line-height: 40px;
+      text-align: center;
+      border: 1px solid rgb(237, 235, 229);
+      border-left: none;
+      margin-bottom: -1px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }

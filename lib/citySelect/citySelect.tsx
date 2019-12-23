@@ -1,17 +1,21 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {Dispatch, SetStateAction, useContext, useEffect, useState} from 'react';
 import './citySelect.scss';
 import ReactDOM from 'react-dom';
 import pinyin from 'tiny-pinyin';
 
 interface Props {
-  dataSource: string[]
+  dataSource: string[];
+  onChange: (p1: string) => void;
 }
 
 interface Context {
-  map: { [key: string]: string[] }
+  map: { [key: string]: string[] };
+  onChange: (p1: string) => void;
+  setDialogVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const CitySelectContext = React.createContext<Context>({map: {}});
+const CitySelectContext = React.createContext<Context>(
+  {map: {}, onChange: (p1: string) => {}, setDialogVisible: () => {}});
 const CitySelect: React.FC<Props> = (props) => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const map: Context['map'] = {};
@@ -28,7 +32,7 @@ const CitySelect: React.FC<Props> = (props) => {
     setDialogVisible(true);
   };
   return (
-    <CitySelectContext.Provider value={{map}}>
+    <CitySelectContext.Provider value={{map, onChange: props.onChange, setDialogVisible}}>
       <div onClick={onClick}>{props.children}</div>
       {dialogVisible && <Dialog onClose={() => setDialogVisible(false)}/>}
     </CitySelectContext.Provider>
@@ -36,14 +40,17 @@ const CitySelect: React.FC<Props> = (props) => {
 };
 
 const Dialog: React.FC<{ onClose: () => void }> = (props) => {
-  const {map} = useContext(CitySelectContext);
+  const {map, onChange} = useContext(CitySelectContext);
+  const cityList = (Object.entries(map))
+    .sort((a, b) => a[0].charCodeAt((0) - b[0].charCodeAt(0)));
   const indexList = Object.keys(map).sort();
+  const onClick = (city: string) => {
+    onChange(city);
+  };
   return ReactDOM.createPortal((
-    <div className="tutu-citySelect-dialog"
-         onClick={props.onClose}
-    >
+    <div className="tutu-citySelect-dialog">
       <header>
-        <span className="icon">&lt;</span>
+        <span className="icon" onClick={props.onClose}>&lt;</span>
         <span>选择城市</span>
       </header>
       <CurrentLocation/>
@@ -52,6 +59,18 @@ const Dialog: React.FC<{ onClose: () => void }> = (props) => {
         {indexList.map(a => <li key={a}>{a}</li>)}
       </ol>
       <div className="cityList">所有城市</div>
+      {cityList.map(([letter, list]) => {
+        return (
+          <div key={letter} className="tutu-citySelect-citySection">
+            <h4 data-letter={letter}>{letter}</h4>
+            {list.map(city =>
+              <div className="tutu-citySelect-cityName"
+                   key={city}
+                   onClick={() => onClick(city)}
+              >{city}</div>)}
+          </div>
+        );
+      })}
     </div>
   ), document.body);
 };
