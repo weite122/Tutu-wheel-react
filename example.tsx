@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 import ButtonExample from './lib/button.example';
-import DialogExample from './lib/dialog/dialog.example';
-import LayoutExample from './lib/layout/layout.example';
+import DialogExample from './lib/dialog/dialog.demo';
+import LayoutExample from './lib/layout/layout.demo';
 import {Layout, Header, Aside, Content, Footer} from './lib/layout/layout';
 import './example.scss';
 import IconDemo from './lib/icon/icon.demo';
-import FormExample from './lib/form/form.example';
-import ScrollExample from './lib/scroll/scroll.example';
+import FormExample from './lib/form/form.demo';
+import ScrollExample from './lib/scroll/scroll.demo';
 import CitySelectExample from './lib/citySelect/citySelect.example'
 
 

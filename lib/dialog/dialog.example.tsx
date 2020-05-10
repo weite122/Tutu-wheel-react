@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import Dialog, {alert, confirm, modal} from './dialog';
+import Button from "../button/button";
 
 export default function () {
   const [x, setX] = useState(false);
   const [y, setY] = useState(false);
   const openModal = () => {
     const close= modal(<h1>你好
-      <button onClick={()=>close()}>close</button>
+      <Button onClick={()=>close()}>close</Button>
     </h1>)
   }
 
@@ -14,31 +15,31 @@ export default function () {
     <div>
       <div>
         <h1>example 4</h1>
-        <button onClick={openModal}>
+        <Button onClick={openModal}>
           modal
-        </button>
+        </Button>
       </div>
 
       <div>
         <h1>example 3</h1>
-        <button onClick={() => alert('1')}>alert</button>
-        <button onClick={() => confirm('1', () => {
+        <Button onClick={() => alert('1')}>alert</Button>
+        <Button onClick={() => confirm('1', () => {
           console.log('yes')},
           () => {
           console.log('no');
         })}>
           confirm
-        </button>
+        </Button>
       </div>
 
 
       <div style={{position: 'relative', zIndex: 10, border: '1px solid red', color: 'red'}}>
         <h1>example 1</h1>
-        <button onClick={() => setX(!x)}>click</button>
+        <Button onClick={() => setX(!x)}>click</Button>
         <Dialog visible={x} buttons={
           [
-            <button onClick={() => {setX(false);}}>1</button>,
-            <button onClick={() => {setX(false);}}>2</button>
+            <Button onClick={() => {setX(false);}}>1</Button>,
+            <Button onClick={() => {setX(false);}}>2</Button>
           ]
         } onClose={() => {setX(false);}}>
           <strong>hi</strong>
@@ -46,11 +47,11 @@ export default function () {
       </div>
       <div style={{position: 'relative', zIndex: 9}}>
         <h1>example 2</h1>
-        <button onClick={() => setY(!y)}>click</button>
+        <Button onClick={() => setY(!y)}>click</Button>
         <Dialog closeOnClickMask={true} visible={y} buttons={
           [
-            <button onClick={() => {setY(false);}}>1</button>,
-            <button onClick={() => {setY(false);}}>2</button>
+            <Button onClick={() => {setY(false);}}>1</Button>,
+            <Button onClick={() => {setY(false);}}>2</Button>
           ]
         } onClose={() => {setY(false);}}>
           <strong>hi</strong>

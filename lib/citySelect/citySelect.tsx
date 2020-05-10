@@ -1,5 +1,6 @@
 import React, {Dispatch, SetStateAction, useContext, useEffect, useState} from 'react';
 import './citySelect.scss';
+import Icon from "../icon/icon";
 import ReactDOM from 'react-dom';
 import pinyin from 'tiny-pinyin';
 
@@ -50,7 +51,7 @@ const Dialog: React.FC<{ onClose: () => void }> = (props) => {
   return ReactDOM.createPortal((
     <div className="tutu-citySelect-dialog">
       <header>
-        <span className="icon" onClick={props.onClose}>&lt;</span>
+        <span className="icon" onClick={props.onClose}><Icon name="left"/></span>
         <span>选择城市</span>
       </header>
       <CurrentLocation/>

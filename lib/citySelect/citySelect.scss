@@ -1,3 +1,4 @@
+@import "../helper";
 .tutu-citySelect {
   &-body {
     overflow: hidden;
@@ -11,7 +12,8 @@
     overflow: auto;
     background: white;
     > header {
-      background: rgb(255, 202, 0);
+      background: $main-color;
+      color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,6 +23,8 @@
       > .icon {
         position: absolute;
         left: 0;
+        padding-left: 10px;
+        cursor: pointer;
       }
     }
   }
@@ -34,7 +38,7 @@
       padding: 4px 0;
     }
   }
-    &-citySection {
+  &-citySection {
     border-left: 1px solid rgb(237, 235, 229);
     overflow: hidden;
     > h4 {

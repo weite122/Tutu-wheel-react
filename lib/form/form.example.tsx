@@ -65,6 +65,7 @@ const FormExample: React.FunctionComponent = () => {
 
   return (
     <div>
+      <h2 style={{paddingBottom: '20px'}}>简单例子</h2>
       <Form value={formData}
             fields={fields}
             buttons={

@@ -3,7 +3,7 @@ import React from 'react';
 
 const ButtonExample: React.FunctionComponent = () => {
   return (
-    <div>hihihi</div>
+    <div>按钮</div>
   );
 };
 
