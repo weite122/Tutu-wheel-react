@@ -33,7 +33,7 @@ export default function () {
       </div>
 
 
-      <div style={{position: 'relative', zIndex: 10, border: '1px solid red', color: 'red'}}>
+      <div style={{position: 'relative', zIndex: 10,  color: 'red'}}>
         <h1>example 1</h1>
         <Button onClick={() => setX(!x)}>click</Button>
         <Dialog visible={x} buttons={

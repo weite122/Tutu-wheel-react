@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
-import ButtonExample from './lib/button.example';
+import ButtonExample from './lib/button/button.demo';
 import DialogExample from './lib/dialog/dialog.demo';
 import LayoutExample from './lib/layout/layout.demo';
 import {Layout, Header, Aside, Content, Footer} from './lib/layout/layout';
@@ -28,22 +28,25 @@ ReactDOM.render(
           <h2>组件</h2>
           <ul>
             <li>
-              <NavLink to="/icon">Icon</NavLink>
+              <NavLink to="/button">按钮 - Button</NavLink>
             </li>
             <li>
-              <NavLink to="/dialog">对话框</NavLink>
+              <NavLink to="/icon">图标 - Icon</NavLink>
             </li>
             <li>
-              <NavLink to="/layout">布局</NavLink>
+              <NavLink to="/dialog">对话框 - Dialog</NavLink>
             </li>
             <li>
-              <NavLink to="/form">表单</NavLink>
+              <NavLink to="/layout">布局 - Layout</NavLink>
             </li>
             <li>
-              <NavLink to="/scroll">滚动条</NavLink>
+              <NavLink to="/form">表单 - Form</NavLink>
             </li>
             <li>
-              <NavLink to="/citySelect">城市选择</NavLink>
+              <NavLink to="/scroll">滚动条 - Scroll</NavLink>
+            </li>
+            <li>
+              <NavLink to="/citySelect">城市选择- CitySelect</NavLink>
             </li>
           </ul>
         </Aside>
